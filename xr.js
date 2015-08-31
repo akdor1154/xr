@@ -117,7 +117,7 @@
               try {
                 _data = opts.load(xhr.responseText);
               } catch (e) {
-                reject(res(xhr.responseText));
+                reject(res(xhr));
               }
             }
           }
