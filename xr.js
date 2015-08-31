@@ -111,7 +111,15 @@
         if (xhr.status >= 200 && xhr.status < 300) {
           var _data = null;
           if (xhr.responseText) {
-            _data = opts.raw === true ? xhr.responseText : opts.load(xhr.responseText);
+            if (opts.raw === true) {
+              _data = xhr.responseText;
+            } else {
+              try {
+                _data = opts.load(xhr.responseText);
+              } catch (e) {
+                reject(res(xhr.responseText));
+              }
+            }
           }
           resolve(_data);
         } else {
